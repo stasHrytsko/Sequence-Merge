@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #faf7f2;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html, body, #root {
+  height: 100%;
+  height: 100dvh;
+}
+
+html {
+  background-color: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: #111827;
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@keyframes mergeFlash {
+  0%   { transform: scale(1);    box-shadow: inset 0 0 0 0 rgba(252, 211, 77, 0); }
+  40%  { transform: scale(1.12); box-shadow: inset 0 0 0 9999px rgba(252, 211, 77, 0.75); }
+  100% { transform: scale(1);    box-shadow: inset 0 0 0 0 rgba(252, 211, 77, 0); }
+}
+
+@keyframes spawnIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes invalidFlash {
+  0%, 100% { box-shadow: inset 0 0 0 0 rgba(248, 113, 113, 0); }
+  45%      { box-shadow: inset 0 0 0 9999px rgba(248, 113, 113, 0.7); }
+}
+
+@keyframes pulseScore {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.18); }
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+.anim-merge   { animation: mergeFlash 320ms ease-out; }
+.anim-spawn   { animation: spawnIn 260ms ease-out; }
+.anim-invalid { animation: invalidFlash 220ms ease-out; }
+.anim-pulse   { animation: pulseScore 220ms ease-out; }
+.anim-overlay { animation: overlayIn 280ms ease-out; }
+.anim-panel   { animation: panelIn 320ms cubic-bezier(0.2, 0.8, 0.2, 1); }
