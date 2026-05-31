@@ -6,6 +6,18 @@ function isNeighbor(r1: number, c1: number, r2: number, c2: number): boolean {
   return Math.abs(r1 - r2) + Math.abs(c1 - c2) === 1
 }
 
+export function getValidNeighbors(grid: number[][], row: number, col: number): [number, number][] {
+  const result: [number, number][] = []
+  for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]] as const) {
+    const r = row + dr
+    const c = col + dc
+    if (r >= 0 && r < 5 && c >= 0 && c < 5 && Math.abs(grid[row][col] - grid[r][c]) === 1) {
+      result.push([r, c])
+    }
+  }
+  return result
+}
+
 export function handleTap(state: GameState, row: number, col: number): GameState {
   if (state.phase !== 'playing') return state
 

@@ -1,4 +1,5 @@
 import Cell from './Cell'
+import { getValidNeighbors } from '../game/tap'
 
 interface Props {
   grid: number[][]
@@ -7,6 +8,8 @@ interface Props {
 }
 
 export default function Grid({ grid, selected, onTap }: Props) {
+  const validNeighbors = selected ? getValidNeighbors(grid, selected[0], selected[1]) : []
+
   return (
     <div className="grid grid-cols-5 gap-2 p-4">
       {grid.map((row, r) =>
@@ -15,6 +18,7 @@ export default function Grid({ grid, selected, onTap }: Props) {
             key={`${r}-${c}`}
             value={value}
             isSelected={selected !== null && selected[0] === r && selected[1] === c}
+            isValidNeighbor={validNeighbors.some(([vr, vc]) => vr === r && vc === c)}
             onTap={() => onTap(r, c)}
           />
         ))

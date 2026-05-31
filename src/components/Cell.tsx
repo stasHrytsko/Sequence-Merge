@@ -11,17 +11,22 @@ export function getCellColor(value: number): string {
 interface Props {
   value: number
   isSelected: boolean
+  isValidNeighbor: boolean
   onTap: () => void
 }
 
-export default function Cell({ value, isSelected, onTap }: Props) {
+export default function Cell({ value, isSelected, isValidNeighbor, onTap }: Props) {
+  let borderClass = 'border-2 border-transparent'
+  if (isSelected) borderClass = 'border-2 border-blue-500'
+  else if (isValidNeighbor) borderClass = 'border-2 border-dashed border-gray-400'
+
   return (
     <div
       className={[
         'aspect-square rounded-xl flex items-center justify-center',
         'font-mono font-bold text-gray-800 select-none cursor-pointer',
-        'border-2',
-        isSelected ? 'border-blue-500 scale-[0.94]' : 'border-transparent',
+        borderClass,
+        isSelected ? 'scale-[0.94]' : '',
       ].join(' ')}
       style={{ background: getCellColor(value) }}
       onClick={onTap}
