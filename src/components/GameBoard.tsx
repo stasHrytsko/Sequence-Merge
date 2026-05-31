@@ -1,7 +1,13 @@
-export default function GameBoard() {
+import Grid from './Grid'
+
+interface Props {
+  grid: number[][]
+}
+
+export default function GameBoard({ grid }: Props) {
   return (
-    <main className="flex-1 p-4">
-      {/* Grid renders here — Task 07 */}
+    <main className="flex-1">
+      <Grid grid={grid} />
     </main>
   )
 }

@@ -26,7 +26,7 @@ export default function App() {
     <div className="min-h-screen" style={{ background: '#faf7f2' }}>
       <div className="mx-auto flex flex-col min-h-screen" style={{ maxWidth: '430px' }}>
         <Header bestScore={state.bestScore} currentMax={state.currentMax} />
-        <GameBoard />
+        <GameBoard grid={state.grid} />
       </div>
     </div>
   )
