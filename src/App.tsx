@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import Header from './components/Header'
 import GameBoard from './components/GameBoard'
 import { initGame, getMaxValue } from './game/init'
-import { loadBestScore } from './game/endgame'
+import { loadBestScore, checkWin, checkGameOver } from './game/endgame'
 import { handleTap } from './game/tap'
 import type { GameState } from './game/types'
 
@@ -24,7 +24,11 @@ export default function App() {
   const [state, setState] = useState<GameState>(createInitialState)
 
   const onTap = useCallback((row: number, col: number) => {
-    setState(prev => handleTap(prev, row, col))
+    setState(prev => {
+      const afterTap = handleTap(prev, row, col)
+      const afterWin = checkWin(afterTap)
+      return checkGameOver(afterWin)
+    })
   }, [])
 
   return (
