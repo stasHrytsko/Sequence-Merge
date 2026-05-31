@@ -1,4 +1,6 @@
 import type { GameState } from './types'
+import { spawnValue } from './spawn'
+import { getMaxValue } from './init'
 
 function isNeighbor(r1: number, c1: number, r2: number, c2: number): boolean {
   return Math.abs(r1 - r2) + Math.abs(c1 - c2) === 1
@@ -26,6 +28,36 @@ export function handleTap(state: GameState, row: number, col: number): GameState
     return { ...state, selected: [row, col] }
   }
 
-  // Neighbor tap → merge logic handled in Task 03b
-  return state
+  const a = state.grid[sr][sc]
+  const b = state.grid[row][col]
+
+  // Scenario 4: neighbor but difference != 1 → invalid
+  if (Math.abs(a - b) !== 1) {
+    return { ...state, selected: null, invalidFlash: [row, col] }
+  }
+
+  // Scenario 5: valid merge
+  const targetRow = a >= b ? sr : row
+  const targetCol = a >= b ? sc : col
+  const sourceRow = a >= b ? row : sr
+  const sourceCol = a >= b ? col : sc
+
+  const newValue = Math.max(a, b) + 1
+  const newGrid = state.grid.map((r, ri) =>
+    r.map((v, ci) => {
+      if (ri === targetRow && ci === targetCol) return newValue
+      if (ri === sourceRow && ci === sourceCol) return spawnValue(state.currentMax)
+      return v
+    })
+  )
+
+  return {
+    ...state,
+    grid: newGrid,
+    selected: null,
+    currentMax: getMaxValue(newGrid),
+    mergeFlash: [targetRow, targetCol],
+    spawnFlash: [sourceRow, sourceCol],
+    invalidFlash: null,
+  }
 }
