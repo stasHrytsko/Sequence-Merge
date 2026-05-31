@@ -18,7 +18,7 @@
 - **Then:** The header shows "Best: 15", if I play a new game and reach only 10 the Best stays at 15, if I play a new game and reach 20 the Best updates to 20, and clicking "Play Again" never resets the Best score
 
 ## What to do
-- При инициализации: `localStorage.getItem('bestScore')` → `bestScore`
-- При `phase = 'finished'`: если `currentMax > bestScore` → записать в localStorage
+- При инициализации: `localStorage.getItem('bestScore')` → `bestScore` (0 если отсутствует — первый запуск)
+- При `phase = 'finished'` ИЛИ `phase = 'won'`: если `currentMax > bestScore` → записать в localStorage
 - `bestScore` передавать в `Header.tsx`
 - "Play Again" не трогает `bestScore`

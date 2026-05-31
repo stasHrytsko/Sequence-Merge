@@ -18,6 +18,6 @@
 
 ## What to do
 - Создать `src/components/GameOverOverlay.tsx`
-- Показывать только когда `phase === 'finished'` и `currentMax < 99`
+- Показывать только когда `phase === 'finished'` (win = отдельный `phase === 'won'`, не попадает сюда)
 - Overlay: fade-in 300ms
 - Содержимое: "No more moves!", "Your best this game", число `currentMax` крупно, кнопка "Play Again"

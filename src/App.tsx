@@ -1,8 +1,6 @@
-import React from 'react'
-
 export default function App() {
   return (
-    <div>
+    <div className="bg-red-500 p-4">
       <h1>Sequence Merge</h1>
     </div>
   )

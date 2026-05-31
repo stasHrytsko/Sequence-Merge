@@ -11,6 +11,7 @@
 
 ## What to do
 - Создать `src/game/types.ts` с типами `GamePhase`, `GameState`
+  - `GamePhase = 'playing' | 'finished' | 'won'` — без `'idle'`; `'won'` = достигнуто 99
 - Создать `src/game/tap.ts`
 - Реализовать `handleTap(state, row, col): GameState` — только сценарии выбора:
   1. `selected === null` → `selected = [r, c]`

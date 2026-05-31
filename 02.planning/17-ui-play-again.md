@@ -17,7 +17,8 @@
 - **Then:** The overlay disappears immediately, a new 5×5 grid appears with numbers 1–9 (different from the previous game), "Current max" resets to the max of the new grid, "Best" remains unchanged from my all-time record, and I can immediately start tapping tiles
 
 ## What to do
-- Кнопка в `GameOverOverlay.tsx` вызывает `resetGame()`
+- Кнопка "Play Again" присутствует в ОБОИХ оверлеях: `GameOverOverlay.tsx` и `WinOverlay.tsx`
+- Обе кнопки вызывают одну и ту же функцию `resetGame()`
 - `resetGame()`: новый `initGame()`, `phase = 'playing'`, `selected = null`, все flash = null
 - `bestScore` — не трогать
-- Overlay скрывается после reset
+- Overlay скрывается после reset (phase переключился на `'playing'`)
