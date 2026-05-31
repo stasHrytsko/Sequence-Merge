@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Header from './components/Header'
 import GameBoard from './components/GameBoard'
 import { initGame, getMaxValue } from './game/init'
@@ -24,18 +24,20 @@ export default function App() {
   const [state, setState] = useState<GameState>(createInitialState)
 
   const onTap = useCallback((row: number, col: number) => {
-    setState(prev => {
-      const afterTap = handleTap(prev, row, col)
-      const afterWin = checkWin(afterTap)
-      return checkGameOver(afterWin)
-    })
+    setState(prev => checkGameOver(checkWin(handleTap(prev, row, col))))
   }, [])
+
+  useEffect(() => {
+    if (!state.invalidFlash) return
+    const t = setTimeout(() => setState(s => ({ ...s, invalidFlash: null })), 200)
+    return () => clearTimeout(t)
+  }, [state.invalidFlash])
 
   return (
     <div className="min-h-screen" style={{ background: '#faf7f2' }}>
       <div className="mx-auto flex flex-col min-h-screen" style={{ maxWidth: '430px' }}>
         <Header bestScore={state.bestScore} currentMax={state.currentMax} />
-        <GameBoard grid={state.grid} selected={state.selected} onTap={onTap} />
+        <GameBoard grid={state.grid} selected={state.selected} invalidFlash={state.invalidFlash} onTap={onTap} />
       </div>
     </div>
   )

@@ -12,13 +12,16 @@ interface Props {
   value: number
   isSelected: boolean
   isValidNeighbor: boolean
+  isInvalidFlash: boolean
   onTap: () => void
 }
 
-export default function Cell({ value, isSelected, isValidNeighbor, onTap }: Props) {
+export default function Cell({ value, isSelected, isValidNeighbor, isInvalidFlash, onTap }: Props) {
   let borderClass = 'border-2 border-transparent'
   if (isSelected) borderClass = 'border-2 border-blue-500'
   else if (isValidNeighbor) borderClass = 'border-2 border-dashed border-gray-400'
+
+  const bg = isInvalidFlash ? '#f87171' : getCellColor(value)
 
   return (
     <div
@@ -28,7 +31,7 @@ export default function Cell({ value, isSelected, isValidNeighbor, onTap }: Prop
         borderClass,
         isSelected ? 'scale-[0.94]' : '',
       ].join(' ')}
-      style={{ background: getCellColor(value) }}
+      style={{ background: bg }}
       onClick={onTap}
     >
       {value}
