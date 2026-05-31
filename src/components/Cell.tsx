@@ -10,13 +10,21 @@ export function getCellColor(value: number): string {
 
 interface Props {
   value: number
+  isSelected: boolean
+  onTap: () => void
 }
 
-export default function Cell({ value }: Props) {
+export default function Cell({ value, isSelected, onTap }: Props) {
   return (
     <div
-      className="aspect-square rounded-xl flex items-center justify-center font-mono font-bold text-gray-800 select-none cursor-pointer"
+      className={[
+        'aspect-square rounded-xl flex items-center justify-center',
+        'font-mono font-bold text-gray-800 select-none cursor-pointer',
+        'border-2',
+        isSelected ? 'border-blue-500 scale-[0.94]' : 'border-transparent',
+      ].join(' ')}
       style={{ background: getCellColor(value) }}
+      onClick={onTap}
     >
       {value}
     </div>
