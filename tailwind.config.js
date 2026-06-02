@@ -16,9 +16,14 @@ export default {
           '40%':  { transform: 'scale(1.12)' },
           '100%': { transform: 'scale(1)' },
         },
+        spawnIn: {
+          '0%':   { opacity: '0', transform: 'scale(0.7)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
       },
       animation: {
         'merge-bounce': 'mergeBounce 300ms ease-out',
+        'spawn-in': 'spawnIn 250ms ease-out',
       },
     },
   },

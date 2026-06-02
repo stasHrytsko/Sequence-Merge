@@ -5,13 +5,14 @@ interface Props {
   selected: [number, number] | null
   invalidFlash: [number, number] | null
   mergeFlash: [number, number] | null
+  spawnFlash: [number, number] | null
   onTap: (row: number, col: number) => void
 }
 
-export default function GameBoard({ grid, selected, invalidFlash, mergeFlash, onTap }: Props) {
+export default function GameBoard({ grid, selected, invalidFlash, mergeFlash, spawnFlash, onTap }: Props) {
   return (
     <main className="flex-1">
-      <Grid grid={grid} selected={selected} invalidFlash={invalidFlash} mergeFlash={mergeFlash} onTap={onTap} />
+      <Grid grid={grid} selected={selected} invalidFlash={invalidFlash} mergeFlash={mergeFlash} spawnFlash={spawnFlash} onTap={onTap} />
     </main>
   )
 }

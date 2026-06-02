@@ -14,10 +14,11 @@ interface Props {
   isValidNeighbor: boolean
   isInvalidFlash: boolean
   isMergeFlash: boolean
+  isSpawnFlash: boolean
   onTap: () => void
 }
 
-export default function Cell({ value, isSelected, isValidNeighbor, isInvalidFlash, isMergeFlash, onTap }: Props) {
+export default function Cell({ value, isSelected, isValidNeighbor, isInvalidFlash, isMergeFlash, isSpawnFlash, onTap }: Props) {
   let borderClass = 'border-2 border-transparent'
   if (isSelected) borderClass = 'border-2 border-blue-500'
   else if (isValidNeighbor) borderClass = 'border-2 border-dashed border-gray-400'
@@ -32,6 +33,7 @@ export default function Cell({ value, isSelected, isValidNeighbor, isInvalidFlas
         borderClass,
         isSelected ? 'scale-[0.94]' : '',
         isMergeFlash ? 'animate-merge-bounce' : '',
+        isSpawnFlash ? 'animate-spawn-in' : '',
       ].join(' ')}
       style={{ background: bg }}
       onClick={onTap}

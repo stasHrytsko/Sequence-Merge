@@ -39,6 +39,12 @@ export default function App() {
     return () => clearTimeout(t)
   }, [state.mergeFlash])
 
+  useEffect(() => {
+    if (!state.spawnFlash) return
+    const t = setTimeout(() => setState(s => ({ ...s, spawnFlash: null })), 250)
+    return () => clearTimeout(t)
+  }, [state.spawnFlash])
+
   return (
     <div className="min-h-screen" style={{ background: '#faf7f2' }}>
       <div className="mx-auto flex flex-col min-h-screen" style={{ maxWidth: '430px' }}>
@@ -48,6 +54,7 @@ export default function App() {
           selected={state.selected}
           invalidFlash={state.invalidFlash}
           mergeFlash={state.mergeFlash}
+          spawnFlash={state.spawnFlash}
           onTap={onTap}
         />
       </div>
