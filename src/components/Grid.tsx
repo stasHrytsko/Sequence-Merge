@@ -5,10 +5,11 @@ interface Props {
   grid: number[][]
   selected: [number, number] | null
   invalidFlash: [number, number] | null
+  mergeFlash: [number, number] | null
   onTap: (row: number, col: number) => void
 }
 
-export default function Grid({ grid, selected, invalidFlash, onTap }: Props) {
+export default function Grid({ grid, selected, invalidFlash, mergeFlash, onTap }: Props) {
   const validNeighbors = selected ? getValidNeighbors(grid, selected[0], selected[1]) : []
 
   return (
@@ -21,6 +22,7 @@ export default function Grid({ grid, selected, invalidFlash, onTap }: Props) {
             isSelected={selected !== null && selected[0] === r && selected[1] === c}
             isValidNeighbor={validNeighbors.some(([vr, vc]) => vr === r && vc === c)}
             isInvalidFlash={invalidFlash !== null && invalidFlash[0] === r && invalidFlash[1] === c}
+            isMergeFlash={mergeFlash !== null && mergeFlash[0] === r && mergeFlash[1] === c}
             onTap={() => onTap(r, c)}
           />
         ))

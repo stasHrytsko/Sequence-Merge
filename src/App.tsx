@@ -33,11 +33,23 @@ export default function App() {
     return () => clearTimeout(t)
   }, [state.invalidFlash])
 
+  useEffect(() => {
+    if (!state.mergeFlash) return
+    const t = setTimeout(() => setState(s => ({ ...s, mergeFlash: null })), 300)
+    return () => clearTimeout(t)
+  }, [state.mergeFlash])
+
   return (
     <div className="min-h-screen" style={{ background: '#faf7f2' }}>
       <div className="mx-auto flex flex-col min-h-screen" style={{ maxWidth: '430px' }}>
         <Header bestScore={state.bestScore} currentMax={state.currentMax} />
-        <GameBoard grid={state.grid} selected={state.selected} invalidFlash={state.invalidFlash} onTap={onTap} />
+        <GameBoard
+          grid={state.grid}
+          selected={state.selected}
+          invalidFlash={state.invalidFlash}
+          mergeFlash={state.mergeFlash}
+          onTap={onTap}
+        />
       </div>
     </div>
   )

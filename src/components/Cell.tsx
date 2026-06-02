@@ -13,15 +13,16 @@ interface Props {
   isSelected: boolean
   isValidNeighbor: boolean
   isInvalidFlash: boolean
+  isMergeFlash: boolean
   onTap: () => void
 }
 
-export default function Cell({ value, isSelected, isValidNeighbor, isInvalidFlash, onTap }: Props) {
+export default function Cell({ value, isSelected, isValidNeighbor, isInvalidFlash, isMergeFlash, onTap }: Props) {
   let borderClass = 'border-2 border-transparent'
   if (isSelected) borderClass = 'border-2 border-blue-500'
   else if (isValidNeighbor) borderClass = 'border-2 border-dashed border-gray-400'
 
-  const bg = isInvalidFlash ? '#f87171' : getCellColor(value)
+  const bg = isInvalidFlash ? '#f87171' : isMergeFlash ? '#fcd34d' : getCellColor(value)
 
   return (
     <div
@@ -30,6 +31,7 @@ export default function Cell({ value, isSelected, isValidNeighbor, isInvalidFlas
         'font-mono font-bold text-gray-800 select-none cursor-pointer',
         borderClass,
         isSelected ? 'scale-[0.94]' : '',
+        isMergeFlash ? 'animate-merge-bounce' : '',
       ].join(' ')}
       style={{ background: bg }}
       onClick={onTap}
